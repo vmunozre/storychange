@@ -48,7 +48,7 @@ contract StoryChain {
 
   //-----------------------HISTORIAS Y CAPITULOS
   // create a new Story TODO: Ownable OJO: MACHACAS LA ANTERIOR
-  function createStory(uint _contestants, uint _maxchapters, uint _pricechapter,uint _votestowin, uint _pricevote) external {
+  function createStory(uint _contestants, uint _maxchapters, uint _pricechapter, uint _votestowin, uint _pricevote) external {
     //Chapter memory _defaultChapter = Chapter(0x0,"","",new address[_votestowin](0));
     contestants = _contestants;
     maxchapters = _maxchapters;
