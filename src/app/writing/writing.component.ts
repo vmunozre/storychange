@@ -18,7 +18,7 @@ export class WritingComponent implements OnInit {
 
   addChapter() {
     let chapter = new Chapter(this.title, this.author, this.body);
-    this.chaptersServices.addChapter(chapter);
+    this.web3connector.addChapter(chapter);
   }
 
   getMaxChapters() {

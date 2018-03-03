@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as storychain_artifacts from "../../../build/contracts/StoryChain.json";
+import { Chapter } from '../../models/chapter.model';
+import { ChaptersService } from './chapters.service';
 declare let window: any;
 declare let require: any;
 const Web3 = require("web3");
@@ -10,8 +12,9 @@ export class Web3ConnectorService {
   web3: any;
   public accounts: any[];
   storyChainContract;
+  lastIdChapter;
 
-  constructor() {
+  constructor(private chaptersService: ChaptersService) {
     window.addEventListener('load', (event) => {
       this.bootstrapWeb3();
     });
@@ -34,6 +37,7 @@ export class Web3ConnectorService {
     }
     this.getMetamaskAccounts();
     this.artifactsToContract(storychain_artifacts);
+    this.listenToEvents();
   }
 
   createStory(_params: object) {
@@ -51,9 +55,48 @@ export class Web3ConnectorService {
         gas: 6385876
       });
     }).then(function (result) {
-      console.log('RESULT', result);
+      console.log('CREATE STORY', result);
     }).catch(function (err) {
       console.error(err);
+    });
+  }
+  addChapter(_chapter: Chapter) {
+    this.storyChainContract
+      .deployed()
+      .then(instance => {
+        instance.addChapter(_chapter.author, _chapter.body, _chapter.title, {
+          from: this.accounts[0],
+          gas: 6385876
+        });
+      })
+      .then(function (result) {
+        console.log("ADD CHAPTER", result);
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+  }
+  // getContestantChapters() {
+  //   this.storyChainContract.deployed().then(instance => {
+  //     instance.getContestantChapters(, {
+  //       from: this.accounts[0],
+  //       gas: 6385876
+  //     })
+  //   });
+  // }
+  listenToEvents() {
+    this.storyChainContract.deployed().then((instance) => {
+      instance.newChapter({}, {}).watch((error, event) => {
+        console.log('EVENT new Chapter', event);
+        this.lastIdChapter = event.args.currentcontestantindex;
+        this.storyChainContract.deployed().then((instance) => {
+          instance.getContestantChapters(this.lastIdChapter).then((_response) => {
+            console.log('CHAPTER CREADO Y RECUPERADO', _response);
+            this.chaptersService.addChapter(new Chapter(_response[3], _response[1], _response[2]));
+          });
+        });
+        //this.chaptersService.addChapter();
+      });
     });
   }
   getMetamaskAccounts() {
