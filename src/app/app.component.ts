@@ -11,6 +11,10 @@ export class AppComponent {
   }
 
   isWriter() {
+    return false;
+  }
+
+  isRead() {
     return true;
   }
 }

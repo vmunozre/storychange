@@ -9,10 +9,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MzButtonModule, MzInputModule } from "ng2-materialize";
 import { WritingComponent } from "./writing/writing.component";
 import { AdminComponent } from "./admin/admin.component";
+import { ReadComponent } from "./read/read.component";
+import { MzModalModule } from "ng2-materialize";
 
 @NgModule({
-  declarations: [AppComponent, WritingComponent, AdminComponent],
+  declarations: [AppComponent, WritingComponent, AdminComponent, ReadComponent],
   imports: [
+    MzModalModule,
     BrowserModule,
     FormsModule,
     HttpModule,
