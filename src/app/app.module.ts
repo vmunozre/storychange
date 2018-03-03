@@ -10,12 +10,21 @@ import { MzButtonModule, MzInputModule, MzModalModule } from "ng2-materialize";
 import { WritingComponent } from "./writing/writing.component";
 import { AdminComponent } from "./admin/admin.component";
 import { ReadComponent } from "./read/read.component";
-import { MzCollapsibleModule } from 'ng2-materialize';
-import { ChaptersListComponent } from './chapters-list/chapters-list.component';
+import { MzCollapsibleModule } from "ng2-materialize";
+import { ChaptersListComponent } from "./chapters-list/chapters-list.component";
+
+import { MzTabModule } from "ng2-materialize";
 
 @NgModule({
-  declarations: [AppComponent, WritingComponent, AdminComponent, ChaptersListComponent, ReadComponent],
+  declarations: [
+    AppComponent,
+    WritingComponent,
+    AdminComponent,
+    ChaptersListComponent,
+    ReadComponent
+  ],
   imports: [
+    MzTabModule,
     MzModalModule,
     BrowserModule,
     FormsModule,
@@ -29,4 +38,4 @@ import { ChaptersListComponent } from './chapters-list/chapters-list.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -6,17 +6,10 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  isAdmin() {
-    return false;
-  }
-
   isWriter() {
     return false;
   }
 
-  isChaptersList() {
-    return false;
-  }
   isRead() {
     return true;
   }
