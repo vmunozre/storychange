@@ -1,32 +1,32 @@
 <div class="row">
-  <form class="col s6 offset-s3">
+  <div class="col s6 offset-s3">
     <div class="card-panel  teal lighten-5">
       <div class="row">
         <div class="input-field col s4">
-          <input [(ngModel)])="story.number_contestants" style="color: black;" placeholder="Número de escritores" id="number_contestants"
+          <input [(ngModel)]="number_contestants" style="color: black;" placeholder="Número de escritores" id="number_contestants"
             type="number" class="validate">
           <label style="color: black;" for="number_contestants">Número de escritores</label>
         </div>
         <div class="input-field col s4">
-          <input [(ngModel)])="story.number_chapters" style="color: black;" placeholder="Número de capítulos" id="number_chapters"
-            type="number" class="validate">
+          <input [(ngModel)]="number_chapters" style="color: black;" placeholder="Número de capítulos" id="number_chapters" type="number"
+            class="validate">
           <label style="color: black;" for="number_chapters">Número de capítulos</label>
         </div>
         <div class="input-field col s4">
-          <input [(ngModel)])="story.number_votes" style="color: black;" placeholder="Número de votos para ganar" id="number_votes"
-            type="number" class="validate">
+          <input [(ngModel)]="number_votes" style="color: black;" placeholder="Número de votos para ganar" id="number_votes" type="number"
+            class="validate">
           <label style="color: black;" for="number_votes">Número de votos para ganar</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input [(ngModel)])="story.price_chapter" style="color: black;" placeholder="Precio para publicar capítulo" id="price_chapter"
-            type="number" class="validate">
+          <input [(ngModel)]="price_chapter" style="color: black;" placeholder="Precio para publicar capítulo" id="price_chapter" type="number"
+            class="validate">
           <label style="color: black;" for="price_chapter">Precio para publicar capítulo</label>
         </div>
         <div class="input-field col s6">
-          <input [(ngModel)])="story.price_vote" style="color: black;" placeholder="Precio para votar un capítulo" id="price_vote"
-            type="number" class="validate">
+          <input [(ngModel)]="price_vote" style="color: black;" placeholder="Precio para votar un capítulo" id="price_vote" type="number"
+            class="validate">
           <label style="color: black;" for="price_vote">Precio para votar un capítulo</label>
         </div>
         <div class="row">
@@ -35,5 +35,5 @@
 
       </div>
     </div>
-  </form>
+  </div>
 </div>

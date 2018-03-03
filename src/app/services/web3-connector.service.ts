@@ -45,9 +45,10 @@ export class Web3ConnectorService {
     //       price_chapter: 0,
     //         price_vote: 0,
     this.storyChainContract.deployed().then((instance) => {
-      return instance.createStory(5, 20, Web3.toWei(0.1, "ether"), 20, Web3.toWei(0.01, "ether"), {
+      debugger;
+      return instance.createStory(_params['number_contestants'], _params['number_chapters'], this.web3.utils.toWei(String(_params['price_chapter']), "ether"), _params['number_votes'], this.web3.utils.toWei(String(_params['price_vote']), "ether"), {
         from: this.accounts[0],
-        gas: 500000
+        gas: 6385876
       });
     }).then(function (result) {
       console.log('RESULT', result);
