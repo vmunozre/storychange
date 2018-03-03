@@ -1,13 +1,19 @@
 <nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo center">StoryChain</a>
+  <div class="nav-wrapper cyan darken-1">
+    <a href="#" class="brand-logo">
+      <img style="vertical-align:middle" class="logo-img" src="assets/images/storyChain.png" />
+      <span style="color: white; font-size: 16px;">¡Hagamos una historia juntos!</span>
+    </a>
   </div>
 </nav>
 <div class="row">
   <div class="col s12">
+
     <ul class="tabs tabs-fixed-width">
       <li class="tab col s3">
-        <a class="active" href="#test1" *ngIf="checkWriter()">Escritura</a>
+        <a class="active" href="#test1" *ngIf="checkWriter()">
+          <span>Escritura</span>
+        </a>
         <a class="active" href="#test1" *ngIf="!checkWriter()">Lectura</a>
       </li>
       <li class="tab col s3">
@@ -16,6 +22,7 @@
       <li class="tab col s3" *ngIf="checkAdmin()">
         <a href="#test3">Admin</a>
       </li>
+      <div class="indicator cyan darken-1" style="z-index: 1;"></div>
     </ul>
   </div>
   <div id="test1" class="col s12">

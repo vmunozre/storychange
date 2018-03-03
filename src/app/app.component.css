@@ -1,0 +1,19 @@
+nav {
+  height: 90px;
+}
+
+.logo-img {
+  width: 85px;
+}
+
+.tabs .tab a.active {
+  color: #00acc1 !important;
+}
+
+.tabs .tab a:hover {
+  color: #00acc1 !important;
+}
+
+.tabs .tab a {
+  color: #00acc1 !important;
+}

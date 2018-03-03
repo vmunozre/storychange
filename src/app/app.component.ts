@@ -16,8 +16,10 @@ export class AppComponent implements OnInit {
   accounts: any[];
   metaCoin;
   isAdmin: boolean = false;
-  isWriter: boolean = true;
-  constructor() {}
+  isWriter: boolean = false;
+  constructor() {
+    this.isAdmin = true;
+  }
   ngOnInit(): void {
     if (typeof window.web3 !== "undefined") {
       // Use Mist/MetaMask's provider
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit {
       ) {
         console.log("Observed new accounts");
         this.accounts = accs;
-        this.isAdmin == true;
+        this.isAdmin = true;
       }
     });
   }
