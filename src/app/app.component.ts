@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import * as metacoin_artifacts from "../../build/contracts/MetaCoin.json";
+import { Chapter } from "../models/chapter.model";
+import { CHAPTERS } from "./mocks/chapters.mock";
+import { ChaptersService } from "./services/chapters.service";
 // import { Web3Service } from "./util/web3.service";
 declare let window: any;
 declare let require: any;
@@ -16,8 +19,10 @@ export class AppComponent implements OnInit {
   accounts: any[];
   metaCoin;
   isAdmin: boolean = false;
-  isWriter: boolean = true;
-  constructor() {}
+  chapters: Chapter[] = [];
+  constructor(private chaptersService: ChaptersService) {
+    this.chapters = CHAPTERS;
+  }
   ngOnInit(): void {
     if (typeof window.web3 !== "undefined") {
       // Use Mist/MetaMask's provider
@@ -69,7 +74,7 @@ export class AppComponent implements OnInit {
     this.metaCoin = contractAbstraction;
   }
   checkWriter() {
-    return this.isWriter;
+    return this.chaptersService.getIsMaxChapter();
   }
 
   checkAdmin() {
