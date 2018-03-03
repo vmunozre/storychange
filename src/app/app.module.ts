@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 import {MetaModule} from './meta/meta.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MzButtonModule, MzInputModule } from 'ng2-materialize';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
