@@ -15,6 +15,9 @@ export class AppComponent {
   }
 
   isChaptersList() {
+    return false;
+  }
+  isRead() {
     return true;
   }
 }
