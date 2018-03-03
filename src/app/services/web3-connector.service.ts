@@ -38,6 +38,12 @@ export class Web3ConnectorService {
 
   createStory(_params: object) {
 
+
+    // number_contestants: 0,
+    //   number_chapters: 0,
+    //     number_votes: 0,
+    //       price_chapter: 0,
+    //         price_vote: 0,
     this.storyChainContract.deployed().then((instance) => {
       return instance.createStory(5, 20, Web3.toWei(0.1, "ether"), 20, Web3.toWei(0.01, "ether"), {
         from: this.accounts[0],
