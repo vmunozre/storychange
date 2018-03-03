@@ -9,9 +9,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MzButtonModule, MzInputModule } from "ng2-materialize";
 import { WritingComponent } from "./writing/writing.component";
 import { AdminComponent } from "./admin/admin.component";
+import { MzCollapsibleModule } from 'ng2-materialize';
+import { ChaptersListComponent } from './chapters-list/chapters-list.component';
 
 @NgModule({
-  declarations: [AppComponent, WritingComponent, AdminComponent],
+  declarations: [AppComponent, WritingComponent, AdminComponent, ChaptersListComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -19,9 +21,10 @@ import { AdminComponent } from "./admin/admin.component";
     MetaModule,
     BrowserAnimationsModule,
     MzButtonModule,
-    MzInputModule
+    MzInputModule,
+    MzCollapsibleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
