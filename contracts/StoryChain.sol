@@ -6,6 +6,7 @@ contract StoryChain {
   struct Chapter{
     address author;
     string alias;
+    string chaptertitle;
     string chaptertext;
     address[] votes;
   }
@@ -66,7 +67,7 @@ contract StoryChain {
     newStory(true);
   }
   // add a chapter TODO: deposit TODO: PRECONDICION comprobar el numero de capitulos; TODO: EVENTO
-  function addChapter(string _alias, string _chaptertext) external {
+  function addChapter(string _alias, string _chaptertext, string _chaptertitle) external {
       //comprobacion ojocuidao concurrencia (modificador)
       //Bucar el primer capitulo nulo
       //Si no hay se cancela ()
@@ -75,6 +76,7 @@ contract StoryChain {
       require(index<=contestants);
       contestantchapters[index].author = msg.sender;
       contestantchapters[index].alias = _alias;
+      contestantchapters[index].chaptertitle = _chaptertitle;
       contestantchapters[index].chaptertext = _chaptertext;
   }
   // comprobar si se puede subir un capitulo
@@ -95,8 +97,8 @@ contract StoryChain {
     return maxchapters+1;
   }
   //GetStory()
-  function getContestantChapters(uint i) public view returns(address,string,string,address[]){
-    return (contestantchapters[i].author,contestantchapters[i].alias,contestantchapters[i].chaptertext,contestantchapters[i].votes);
+  function getContestantChapters(uint i) public view returns(address,string,string,string,address[]){
+    return (contestantchapters[i].author,contestantchapters[i].alias,contestantchapters[i].chaptertext, contestantchapters[i].chaptertitle,contestantchapters[i].votes);
   }
   function getChapters(uint i) public view returns(address,string,string,address[]){
     return (chapters[i].author,chapters[i].alias,chapters[i].chaptertext,chapters[i].votes);

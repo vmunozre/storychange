@@ -15,6 +15,7 @@ import { ChaptersListComponent } from "./chapters-list/chapters-list.component";
 
 import { MzTabModule } from "ng2-materialize";
 import { UtilModule } from "./util/util.module";
+import { ChaptersService } from "./services/chapters.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { UtilModule } from "./util/util.module";
     MzInputModule,
     MzCollapsibleModule
   ],
-  providers: [],
+  providers: [ChaptersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
