@@ -8,9 +8,10 @@ import { MetaModule } from "./meta/meta.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MzButtonModule, MzInputModule } from "ng2-materialize";
 import { WritingComponent } from "./writing/writing.component";
+import { AdminComponent } from "./admin/admin.component";
 
 @NgModule({
-  declarations: [AppComponent, WritingComponent],
+  declarations: [AppComponent, WritingComponent, AdminComponent],
   imports: [
     BrowserModule,
     FormsModule,

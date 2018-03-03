@@ -1,4 +1,3 @@
-<h1>Generador de historias to guapas</h1>
-<!-- <app-meta-sender></app-meta-sender> -->
-<!-- <app-writing></app-writing> -->
-<app-writing></app-writing>
+<h1>StoryChain</h1>
+<app-writing *ngIf="isWriter()"></app-writing>
+<app-admin *ngIf="isAdmin()"></app-admin>
