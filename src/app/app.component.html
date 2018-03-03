@@ -7,25 +7,25 @@
   <div class="col s12">
     <ul class="tabs tabs-fixed-width">
       <li class="tab col s3">
-        <a class="active" href="#test1" *ngIf="isWriter()">Escritura</a>
-        <a class="active" href="#test1" *ngIf="isRead()">Lectura</a>
+        <a class="active" href="#test1" *ngIf="checkWriter()">Escritura</a>
+        <a class="active" href="#test1" *ngIf="!checkWriter()">Lectura</a>
       </li>
       <li class="tab col s3">
         <a href="#test2">Archivo</a>
       </li>
-      <li class="tab col s3 disabled">
+      <li class="tab col s3" *ngIf="checkAdmin()">
         <a href="#test3">Admin</a>
       </li>
     </ul>
   </div>
   <div id="test1" class="col s12">
-    <app-writing *ngIf="isWriter()"></app-writing>
-    <app-read *ngIf="isRead()"></app-read>
+    <app-writing *ngIf="checkWriter()"></app-writing>
+    <app-read *ngIf="!checkWriter()"></app-read>
   </div>
   <div id="test2" class="col s12">
     <app-chapters-list></app-chapters-list>
   </div>
-  <div id="test3" class="col s12">
+  <div id="test3" class="col s12" *ngIf="checkAdmin()">
     <app-admin></app-admin>
   </div>
 </div>

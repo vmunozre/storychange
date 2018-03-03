@@ -14,6 +14,7 @@ import { MzCollapsibleModule } from "ng2-materialize";
 import { ChaptersListComponent } from "./chapters-list/chapters-list.component";
 
 import { MzTabModule } from "ng2-materialize";
+import { UtilModule } from "./util/util.module";
 
 @NgModule({
   declarations: [
