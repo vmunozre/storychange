@@ -100,8 +100,8 @@ contract StoryChain {
   function getContestantChapters(uint i) public view returns(address,string,string,string,address[]){
     return (contestantchapters[i].author,contestantchapters[i].alias,contestantchapters[i].chaptertext, contestantchapters[i].chaptertitle,contestantchapters[i].votes);
   }
-  function getChapters(uint i) public view returns(address,string,string,address[]){
-    return (chapters[i].author,chapters[i].alias,chapters[i].chaptertext,chapters[i].votes);
+  function getChapters(uint i) public view returns(address,string,string,string,address[]){
+    return (chapters[i].author,chapters[i].alias,chapters[i].chaptertext,chapters[i].chaptertitle,chapters[i].votes);
   }
   function getStory() public view returns(uint,uint,uint,uint,uint) {
     return(contestants,maxchapters,pricechapter,votestowin,pricevote);
@@ -135,6 +135,7 @@ contract StoryChain {
     chapters[insert].author = msg.sender;
     chapters[insert].alias = contestantchapters[index].alias;
     chapters[insert].chaptertext = contestantchapters[index].chaptertext;
+    chapters[insert].chaptertitle = contestantchapters[index].chaptertitle;
   }
 
 }

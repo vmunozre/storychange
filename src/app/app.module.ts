@@ -16,6 +16,7 @@ import { ChaptersListComponent } from "./chapters-list/chapters-list.component";
 import { MzTabModule } from "ng2-materialize";
 import { UtilModule } from "./util/util.module";
 import { ChaptersService } from "./services/chapters.service";
+import { Web3ConnectorService } from "./services/web3-connector.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { ChaptersService } from "./services/chapters.service";
     MzInputModule,
     MzCollapsibleModule
   ],
-  providers: [ChaptersService],
+  providers: [ChaptersService, Web3ConnectorService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
