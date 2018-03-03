@@ -1,9 +1,38 @@
-<h1>Angular Truffle Box</h1>
-<app-meta-sender></app-meta-sender>
-<a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-<div class="row">
-    <div class="input-field col s6">
-      <input value="Alvin" id="first_name2" type="text" class="validate">
-      <label class="active" for="first_name2">First Name</label>
-    </div>
+<nav>
+  <div class="nav-wrapper cyan darken-1">
+    <a href="#" class="brand-logo">
+      <img style="vertical-align:middle" class="logo-img" src="assets/images/storyChain.png" />
+      <span style="color: white; font-size: 16px;">¡Hagamos una historia juntos!</span>
+    </a>
   </div>
+</nav>
+<div class="row">
+  <div class="col s12">
+
+    <ul class="tabs tabs-fixed-width">
+      <li class="tab col s3">
+        <a class="active" href="#test1" *ngIf="checkWriter()">
+          <span>Escritura</span>
+        </a>
+        <a class="active" href="#test1" *ngIf="!checkWriter()">Lectura</a>
+      </li>
+      <li class="tab col s3">
+        <a href="#test2">Archivo</a>
+      </li>
+      <li class="tab col s3" *ngIf="checkAdmin()">
+        <a href="#test3">Admin</a>
+      </li>
+      <div class="indicator cyan darken-1" style="z-index: 1;"></div>
+    </ul>
+  </div>
+  <div id="test1" class="col s12">
+    <app-writing *ngIf="checkWriter()"></app-writing>
+    <app-read *ngIf="!checkWriter()"></app-read>
+  </div>
+  <div id="test2" class="col s12">
+    <app-chapters-list></app-chapters-list>
+  </div>
+  <div id="test3" class="col s12" *ngIf="checkAdmin()">
+    <app-admin></app-admin>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col s4 offset-s1" *ngFor="let chapter of chapters">
+    <div class="card teal lighten-5">
+      <div class="card-content white-text">
+        <span style="color: black;" class="card-title">{{chapter.title}}</span>
+        <p style="color: black;" class="elipsis"> {{chapter.body}}</p>
+      </div>
+      <div class="card-action">
+        <button mz-button (click)="openModal(chapter, bottomSheetModal)">Leer</button>
+        <span class="badge new" data-badge-caption="Votos">0</span>
+      </div>
+    </div>
+  </div>
+  <mz-modal class="teal lighten-5" #bottomSheetModal [fixedFooter]="true" [bottomSheet]="false" [options]="modalOptions">
+    <mz-modal-header>
+      {{chapter.title}}
+    </mz-modal-header>
+    <mz-modal-content>
+      {{chapter.body}}
+    </mz-modal-content>
+    <mz-modal-footer>
+      <button mz-button [flat]="true" mz-modal-close>Cancelar</button>
+      <button mz-button [flat]="true" mz-modal-close>Votar</button>
+    </mz-modal-footer>
+  </mz-modal>
+</div>

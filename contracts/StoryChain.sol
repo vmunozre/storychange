@@ -7,6 +7,7 @@ contract StoryChain {
     address author;
     string alias;
     string chaptertext;
+    string chaptertitle;
     address[] votes;
   }
 
@@ -47,7 +48,7 @@ contract StoryChain {
 
   //-----------------------HISTORIAS Y CAPITULOS
   // create a new Story TODO: Ownable OJO: MACHACAS LA ANTERIOR
-  function createStory(uint _contestants, uint _maxchapters, uint _pricechapter,uint _votestowin, uint _pricevote) external {
+  function createStory(uint _contestants, uint _maxchapters, uint _pricechapter, uint _votestowin, uint _pricevote) external {
     //Chapter memory _defaultChapter = Chapter(0x0,"","",new address[_votestowin](0));
     contestants = _contestants;
     maxchapters = _maxchapters;
@@ -56,17 +57,16 @@ contract StoryChain {
     pricevote = _pricevote;
 
     for(uint i = 0; i<_maxchapters; i++){
-      chapters.push(Chapter(0x0,"","",new address[](_votestowin)));
+      chapters.push(Chapter(0x0,"","","",new address[](_votestowin)));
     }
 
-    Chapter[] storage initialcontestantchapters;
     for(i = 0; i<_contestants; i++){
-      contestantchapters.push(Chapter(0x0,"","",new address[](_votestowin)));
+      contestantchapters.push(Chapter(0x0,"","","",new address[](_votestowin)));
     }
     newStory(true);
   }
   // add a chapter TODO: deposit TODO: PRECONDICION comprobar el numero de capitulos; TODO: EVENTO
-  function addChapter(string _alias, string _chaptertext) external {
+  function addChapter(string _alias, string _chaptertext, string _chaptertitle) external {
       //comprobacion ojocuidao concurrencia (modificador)
       //Bucar el primer capitulo nulo
       //Si no hay se cancela ()
@@ -76,6 +76,9 @@ contract StoryChain {
       contestantchapters[index].author = msg.sender;
       contestantchapters[index].alias = _alias;
       contestantchapters[index].chaptertext = _chaptertext;
+      contestantchapters[index].chaptertitle = _chaptertitle;
+
+      newChapter(true,index);
   }
   // comprobar si se puede subir un capitulo
   function checkIfAddChapter() public view returns(uint) {
@@ -95,11 +98,11 @@ contract StoryChain {
     return maxchapters+1;
   }
   //GetStory()
-  function getContestantChapters(uint i) public view returns(address,string,string,address[]){
-    return (contestantchapters[i].author,contestantchapters[i].alias,contestantchapters[i].chaptertext,contestantchapters[i].votes);
+  function getContestantChapters(uint i) public view returns(address,string,string,string,address[]){
+    return (contestantchapters[i].author,contestantchapters[i].alias,contestantchapters[i].chaptertext,contestantchapters[i].chaptertitle,contestantchapters[i].votes);
   }
-  function getChapters(uint i) public view returns(address,string,string,address[]){
-    return (chapters[i].author,chapters[i].alias,chapters[i].chaptertext,chapters[i].votes);
+  function getChapters(uint i) public view returns(address,string,string,string,address[]){
+    return (chapters[i].author,chapters[i].alias,chapters[i].chaptertext,chapters[i].chaptertitle,chapters[i].votes);
   }
   function getStory() public view returns(uint,uint,uint,uint,uint) {
     return(contestants,maxchapters,pricechapter,votestowin,pricevote);
@@ -112,11 +115,35 @@ contract StoryChain {
     //comprobacion ojocuidao concurrencia (modificador)
     //Bucar el primer capitulo nulo
     //Si no hay se cancela ()
+    //Si es el voto nº maxvote del capitulo, lo cierra
+    require(checkIfCanVote());
+    uint indextovote = checkIfCanVoteChapter(_index);
+    require(indextovote<=votestowin);
+    contestantchapters[_index].votes[indextovote] = msg.sender;
+    newVote(true,indextovote);
+    if (indextovote==votestowin){
+      closeChapter(_index);
+      for(uint i = 0; i<contestantchapters.length; i++){
+        contestantchapters[i].author = 0x0;
+        contestantchapters[i].alias = "";
+        contestantchapters[i].chaptertext = "";
+        contestantchapters[i].chaptertitle = "";
+        contestantchapters[i].votes = new address[](votestowin);
+      }
+    }
   }
 
 
   //comprobar votos (nº votes no nulos)
   // comprobar si se puede votar un capitulo
+  function checkIfCanVoteChapter(uint index) internal returns(uint) {
+      for (uint j=0;j<contestantchapters[index].votes.length; j++)
+        if( contestantchapters[index].votes[j] == 0x0){
+          return j;
+      }
+    return votestowin+1;
+  }
+
   function checkIfCanVote() internal returns(bool) {
     for (uint i=0;i<contestantchapters.length ;i++){
       for (uint j=0;j<contestantchapters[i].votes.length; j++)
@@ -132,7 +159,10 @@ contract StoryChain {
     require(insert<=maxchapters);
     chapters[insert].author = msg.sender;
     chapters[insert].alias = contestantchapters[index].alias;
+    chapters[insert].chaptertitle = contestantchapters[index].chaptertitle;
     chapters[insert].chaptertext = contestantchapters[index].chaptertext;
+    closedChapter(true, insert);
+
   }
 
 }
